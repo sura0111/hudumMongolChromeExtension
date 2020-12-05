@@ -1,8 +1,10 @@
 import Vue from 'vue'
-import App from './App.vue'
+import popup from './popup.vue'
+import vuetify from '@/plugins/vuetify'
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  render: (h) => h(App),
+const app = new Vue({
+  render: (h) => h(popup),
+  vuetify,
 })
+
+app.$mount('#app')

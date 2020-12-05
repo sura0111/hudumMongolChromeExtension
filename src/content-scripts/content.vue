@@ -1,12 +1,13 @@
 <template>
-  <div :id="extensionId">Hello World</div>
+  <div>
+    <tips></tips>
+  </div>
 </template>
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import extensionId from './extensionId'
-@Component
-export default class Content extends Vue {
-  extensionId = extensionId
-}
+import Tips from '@/content-scripts/components/tips.vue'
+
+@Component({ components: { Tips } })
+export default class Content extends Vue {}
 </script>

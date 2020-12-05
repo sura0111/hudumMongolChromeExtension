@@ -1,17 +1,33 @@
 import Content from './content.vue'
+import './style.scss'
 import Vue from 'vue'
-console.log('Hello from the content-script')
+import keyboard from './keyboard'
+import { EXTENSION_ID, StorageKey } from '@/constants'
+import consola from 'consola'
+import store from './store'
 
-const extensionId = (chrome || browser).runtime.id
-console.log(extensionId)
-const elementId = extensionId + '-script'
-const div = document.createElement('div')
-div.id = elementId
+Vue.config.productionTip = false
 
-if (!document.body.querySelector(`#${elementId}`)) {
-  document.body.append(div)
-  const app = new Vue({
-    render: (h) => h(Content),
-  })
-  app.$mount(`#${elementId}`)
+const keyboardSet = (on: boolean) => {
+  store.isExtensionTurnedOn = on
+  keyboard.turn(on)
 }
+
+chrome.storage.sync.get([StorageKey.extensionActivated], (value) => {
+  keyboardSet(!!value[StorageKey.extensionActivated])
+})
+
+chrome.storage.onChanged.addListener((changes) => {
+  keyboardSet(changes[StorageKey.extensionActivated]?.newValue ?? false)
+})
+
+const div = document.createElement('div')
+div.id = EXTENSION_ID + '-script'
+
+if (!document.body.querySelector(`#${div.id}`)) {
+  document.body.append(div)
+  const app = new Vue({ render: (h) => h(Content) })
+  app.$mount(`#${div.id}`)
+}
+
+consola.ready(`Mongolian Written Extension is loaded as Extension ID: ${EXTENSION_ID}`)
