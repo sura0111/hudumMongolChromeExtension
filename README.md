@@ -1,4 +1,4 @@
-# vcrhroxt
+# Traditional Mongolian Script Keyboard Extension for Chrome
 
 ## Project setup
 ```
