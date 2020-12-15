@@ -1,33 +1,16 @@
-import Content from './content.vue'
-import './style.scss'
-import Vue from 'vue'
-import keyboard from './keyboard'
-import { EXTENSION_ID, StorageKey } from '@/constants'
-import consola from 'consola'
-import store from './store'
+import { StorageKey } from '@/constants'
+import WrittenMongolKeyboard from 'written-mongol-keyboard'
 
-Vue.config.productionTip = false
+const keyboard = new WrittenMongolKeyboard()
 
-const keyboardSet = (on: boolean) => {
-  store.isExtensionTurnedOn = on
-  keyboard.turn(on)
-}
-
-chrome.storage.sync.get([StorageKey.extensionActivated], (value) => {
-  keyboardSet(!!value[StorageKey.extensionActivated])
+chrome.storage.sync.get([StorageKey.isActive], (value) => {
+  keyboard.switch = !!value[StorageKey.isActive]
 })
 
 chrome.storage.onChanged.addListener((changes) => {
-  keyboardSet(changes[StorageKey.extensionActivated]?.newValue ?? false)
+  keyboard.switch = changes[StorageKey.isActive]?.newValue ?? false
 })
 
-const div = document.createElement('div')
-div.id = EXTENSION_ID + '-script'
-
-if (!document.body.querySelector(`#${div.id}`)) {
-  document.body.append(div)
-  const app = new Vue({ render: (h) => h(Content) })
-  app.$mount(`#${div.id}`)
-}
-
-consola.ready(`Mongolian Written Extension is loaded as Extension ID: ${EXTENSION_ID}`)
+keyboard.onSwitch((isOn) => {
+  chrome.storage.sync.set({ [StorageKey.isActive]: isOn })
+})

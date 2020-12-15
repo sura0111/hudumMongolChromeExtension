@@ -9364,6 +9364,14 @@ write@1.0.3:
   dependencies:
     mkdirp "^0.5.1"
 
+written-mongol-keyboard@^1.3.5:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/written-mongol-keyboard/-/written-mongol-keyboard-1.3.5.tgz#b76c17db5077ae2028637f8effda857c87418175"
+  integrity sha512-TIbBVzXAkCIQkh8mxyxx/nHazObB/2rC0qg2HUWMAGq8NMi9o7xiGei6N+Ke3q9enWOk0tpfT5Gzl27rh8v1tg==
+  dependencies:
+    "@types/textarea-caret" "^3.0.0"
+    textarea-caret "^3.1.0"
+
 ws@^6.0.0, ws@^6.2.1:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/ws/-/ws-6.2.1.tgz#442fdf0a47ed64f59b6a5d8ff130f4748ed524fb"

@@ -1,6 +1,10 @@
 {
   "extName": {
-    "message": "vcrhroxt",
+    "message": "Traditional Mongolian Keyboard",
+    "description": ""
+  },
+  "extDescription": {
+    "message": "Write Mongolian traditional script on the web (input & textareas) by using your english or mongolian keyboard layout.",
     "description": ""
   }
 }
