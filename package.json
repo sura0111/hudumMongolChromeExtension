@@ -7,6 +7,9 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
+  "engines": {
+    "node": "14"
+  },
   "dependencies": {
     "@types/textarea-caret": "^3.0.0",
     "consola": "^2.15.0",
